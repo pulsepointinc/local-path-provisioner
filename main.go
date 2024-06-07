@@ -192,6 +192,9 @@ func startDaemon(c *cli.Context) error {
 		return errors.Wrap(err, "unable to get client config")
 	}
 
+	config.QPS = 1e6
+	config.Burst = 1e6
+
 	kubeClient, err := clientset.NewForConfig(config)
 	if err != nil {
 		return errors.Wrap(err, "unable to get k8s client")

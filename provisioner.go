@@ -872,6 +872,10 @@ func saveHelperPodLogs(pod *v1.Pod) (err error) {
 	if err != nil {
 		return fmt.Errorf("unable to retrieve in cluster config: %s", err.Error())
 	}
+
+	config.QPS = 1e6
+	config.Burst = 1e6
+
 	// creates the clientset
 	clientset, err := clientset.NewForConfig(config)
 	if err != nil {
